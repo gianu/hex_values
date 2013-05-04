@@ -1,17 +1,24 @@
 require "hex_values/version"
 
 module HexValuesFromFloat
+  MAX_DECIMALS = 14
+
   def to_hex
     num,dec = get_hex_value(self)
     first = num
     second = ""
     iterations = 0
-    while dec > 0 && iterations < 10
+    while dec > 0 && iterations < MAX_DECIMALS
       num, dec = get_hex_value(dec*16)
       second << num
       iterations += 1
     end
-    "#{first}.#{second}"
+
+    if "".eql? second
+      first
+    else
+      "#{first}.#{second}"
+    end
   end
 
   private
@@ -26,16 +33,21 @@ module FloatValuesFromString
   def to_float
     number = 0
     base, remainder = self.split('.')
-    arr=[]
-    base.each_char { |c| arr << c }
-    arr.reverse!.each_index do |index|
-      number += arr[index].to_i(16) * (16 ** index)
+
+    if base
+      arr=[]
+      base.each_char { |c| arr << c }
+      arr.reverse!.each_index do |index|
+        number += arr[index].to_i(16) * (16 ** index)
+      end
     end
 
-    arr=[]
-    remainder.each_char { |c| arr << c }
-    arr.each_index do |index|
-      number += arr[index].to_i(16).to_f / (16 ** (index + 1))
+    if remainder
+      arr=[]
+      remainder.each_char { |c| arr << c }
+      arr.each_index do |index|
+        number += arr[index].to_i(16).to_f / (16 ** (index + 1))
+      end
     end
 
     number
@@ -48,4 +60,10 @@ end
 
 class String
   include FloatValuesFromString
+end
+
+class Fixnum
+  def to_hex
+    self.to_f.to_hex
+  end
 end
