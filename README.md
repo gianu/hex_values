@@ -1,6 +1,6 @@
 # HexValues
 
-TODO: Write a gem description
+Transform your float to hexadecimals and viceversa!
 
 ## Installation
 
@@ -18,12 +18,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+require the gem:
+
+     require 'hex_values'
+
+And then transform any float to a hexadecimal:
+
+     irb> 234.25.to_hex
+     => "EA.4"
+
+Or transform any hexadecimal to the corresponding float:
+
+     irb> "EA.4".to_float
+     => 234.25
+
 
 ## Contributing
+
+### Forking the project
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Creating an issue
+
+Go to the issue tab and create a new issue explaining what is happening and what it the expected behaviour.
