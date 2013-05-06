@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/hex_values.png)](http://badge.fury.io/rb/hex_values)
 [![Code Climate](https://codeclimate.com/github/gianu/hex_values.png)](https://codeclimate.com/github/gianu/hex_values)
+[![Build Status](https://travis-ci.org/gianu/hex_values.png)](https://travis-ci.org/gianu/hex_values)
 
 Transform your float to hexadecimals and viceversa!
 
