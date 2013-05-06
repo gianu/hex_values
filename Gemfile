@@ -7,4 +7,4 @@ group :test do
   gem 'rake'
 end
 
-gem 'coverall', require: false
+gem 'coveralls', require: false
