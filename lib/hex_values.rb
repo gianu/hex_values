@@ -34,23 +34,18 @@ module FloatValuesFromString
     number = 0
     base, remainder = self.split('.')
 
-    if base
-      arr=[]
-      base.each_char { |c| arr << c }
-      arr.reverse!.each_index do |index|
-        number += arr[index].to_i(16) * (16 ** index)
-      end
-    end
-
-    if remainder
-      arr=[]
-      remainder.each_char { |c| arr << c }
-      arr.each_index do |index|
-        number += arr[index].to_i(16).to_f / (16 ** (index + 1))
-      end
-    end
+    get_sum(base.split(//).reverse!) { |element, index| number += element.to_i(16) * (16 ** index) } if base
+    get_sum(remainder.split(//)) { |element, index| number += element.to_i(16).to_f / (16 ** (index + 1)) } if remainder
 
     number
+  end
+
+  private
+
+  def get_sum(array, &block)
+    array.each_index do |index|
+      block.call(array[index], index)
+    end
   end
 end
 
