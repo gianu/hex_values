@@ -75,6 +75,28 @@ describe 'HexValues' do
     end
   end
 
+  describe "integer to hex with precision" do
+    it "converts 1 to 1 (without parameter)" do
+      1.to_hex.must_equal "1"
+    end
+
+    it "converts 1 to 1 (with precision = 40)" do
+      1.to_hex(14).must_equal "1"
+    end
+
+    it "converts 1 to 1 (with precision = 0)" do
+      1.to_hex(0).must_equal "1"
+    end
+
+    it "converts 1 to 1 (with precision = -1)" do
+      1.to_hex(-1).must_equal "1"
+    end
+
+    it "converts 13 to D (with precision = 12)" do
+      13.to_hex(12).must_equal "D"
+    end
+  end
+
   describe "hex to float" do
     it "converts EA.4 to 234.25" do
       "EA.4".to_float.must_equal 234.25

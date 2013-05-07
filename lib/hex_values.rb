@@ -60,7 +60,7 @@ class String
 end
 
 class Fixnum
-  def to_hex
-    self.to_f.to_hex
+  def to_hex(precision=HexValuesFromFloat::MAX_DECIMALS)
+    self.to_f.to_hex(precision)
   end
 end
