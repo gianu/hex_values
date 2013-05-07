@@ -3,12 +3,14 @@ require "hex_values/version"
 module HexValuesFromFloat
   MAX_DECIMALS = 14
 
-  def to_hex
+  def to_hex(precision = MAX_DECIMALS)
+    precision = MAX_DECIMALS if precision < 0
+
     num,dec = get_hex_value(self)
     first = num
     second = ""
     iterations = 0
-    while dec > 0 && iterations < MAX_DECIMALS
+    while dec > 0 && iterations < precision
       num, dec = get_hex_value(dec*16)
       second << num
       iterations += 1

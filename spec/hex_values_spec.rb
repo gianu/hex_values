@@ -39,6 +39,42 @@ describe 'HexValues' do
     end
   end
 
+  describe "float to hex with precision" do
+    it "converts 234.25 to EA.4 (no matter precision)" do
+      result = 234.25.to_hex(140)
+      result.must_equal "EA.4"
+      num, dec = result.split('.')
+      dec.size.must_equal 1
+    end
+
+    it "converts 1875.37 with 5 numbers after period" do
+      result = 1875.37.to_hex(5)
+      result.must_equal "753.5EB85"
+      num, dec = result.split('.')
+      dec.size.must_equal 5
+    end
+
+    it "converts 1875.37 with 50 numbers after period" do
+      result = 1875.37.to_hex(50)
+      num, dec = result.split('.')
+      dec.size.must_equal 50
+    end
+
+    it "converts 1875.37 with 0 numbers after period" do
+      result = 1875.37.to_hex(0)
+      result.must_equal "753"
+      num, dec = result.split('.')
+      dec.must_be_nil
+    end
+
+    it "converts 1875.37 with 14 numbers after period (if a negative precision is provided)" do
+      result = 1875.37.to_hex(-1)
+      result.must_equal "753.5EB851EB851EB8"
+      num, dec = result.split('.')
+      dec.size.must_equal 14
+    end
+  end
+
   describe "hex to float" do
     it "converts EA.4 to 234.25" do
       "EA.4".to_float.must_equal 234.25
