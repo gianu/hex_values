@@ -42,6 +42,34 @@ Or transform any hexadecimal to the corresponding float:
 # => 234.25
 ```
 
+## Hexadecimal
+
+To be more precise, when you transoform a Float (or a Fixnum) to an hexadecimal, you get a Hexadecimal object. This object is a representation of the Hexadecimal value, and you can operate on this object:
+
+```ruby
+hexa = 234.25.to_hex
+result = hexa + 234.25
+result.to_s
+# => "1D4.8"
+```
+
+also you can operate over a Float (or a Fixnum) using an Hexadecimal value.
+
+```ruby
+hexa = 234.25.to_hex
+result = 234.25 + hexa # I know, this is obvious...but is better to explain that works.
+result.to_s
+# => "1D4.8"
+```
+
+So far, the operations availables are:
+
+* plus (+)
+* minus (-)
+* multiply (*)
+* division (/)
+* Power (**)
+
 ### From float to Hex
 
 The "to_hex" method allows a precision parameter to set the maximum number of decimals to calculate (default 14).

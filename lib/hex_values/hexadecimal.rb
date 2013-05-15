@@ -42,15 +42,7 @@ class Hexadecimal
   #
   # Returns an Hexadecimal object, sum of the two objects.
   def +(other_obj)
-    if other_obj.instance_of? Hexadecimal
-      float_result = self.to_float + other_obj.to_float
-      max_precision = (self.max_decimals > other_obj.max_decimals) ? self.max_decimals : other_obj.max_decimals
-    else
-      float_result = self.to_float + other_obj
-      max_precision = self.max_decimals
-    end
-
-    Hexadecimal.new(float_result, max_precision)
+    return operation(self, other_obj, "+".to_sym)
   end
 
   # Public: Substracts two values.
@@ -69,15 +61,7 @@ class Hexadecimal
   #
   # Returns an Hexadecimal object, the multiplication of the operands.
   def *(other_obj)
-    if other_obj.instance_of? Hexadecimal
-      float_result = self.to_float * other_obj.to_float
-      max_precision = (self.max_decimals > other_obj.max_decimals) ? self.max_decimals : other_obj.max_decimals
-    else
-      float_result = self.to_float * other_obj
-      max_precision = self.max_decimals
-    end
-
-    Hexadecimal.new(float_result, max_precision)
+    return operation(self, other_obj, "*".to_sym)
   end
 
   # Public: Divide two values.
@@ -86,15 +70,7 @@ class Hexadecimal
   #
   # Returns an Hexadecimal object, the division of the operands.
   def /(other_obj)
-    if other_obj.instance_of? Hexadecimal
-      float_result = self.to_float / other_obj.to_float
-      max_precision = (self.max_decimals > other_obj.max_decimals) ? self.max_decimals : other_obj.max_decimals
-    else
-      float_result = self.to_float / other_obj
-      max_precision = self.max_decimals
-    end
-
-    Hexadecimal.new(float_result, max_precision)
+    return operation(self, other_obj, "/".to_sym)
   end
 
   # Public: Pow two values.
@@ -103,15 +79,7 @@ class Hexadecimal
   #
   # Returns an Hexadecimal object, the power of the operands.
   def **(other_obj)
-    if other_obj.instance_of? Hexadecimal
-      float_result = self.to_float ** other_obj.to_float
-      max_precision = (self.max_decimals > other_obj.max_decimals) ? self.max_decimals : other_obj.max_decimals
-    else
-      float_result = self.to_float ** other_obj
-      max_precision = self.max_decimals
-    end
-
-    Hexadecimal.new(float_result, max_precision)
+    return operation(self, other_obj, "**".to_sym)
   end
 
   # Public: Transform a given string into a Hexadecimal object.
@@ -148,4 +116,15 @@ class Hexadecimal
     end
   end
 
+  def operation(hex1, hex2, operation)
+    if hex2.instance_of? Hexadecimal
+      float_result = hex1.to_float.send(operation, hex2.to_float)
+      max_precision = (hex1.max_decimals > hex2.max_decimals) ? hex1.max_decimals : hex2.max_decimals
+    else
+      float_result = hex1.to_float.send(operation, hex2)
+      max_precision = hex1.max_decimals
+    end
+
+    Hexadecimal.new(float_result, max_precision)
+  end
 end
