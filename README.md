@@ -81,6 +81,16 @@ Bear in mind that the larger the number, the larger the amount of time used to g
 # => 753.5EB851EB851EB851EB851EB851EB851EB851EB851EB851EB85
 ```
 
+## Supported Ruby versions
+
+This gem is tested with:
+
+* ruby 1.9.2
+* ruby 1.9.3
+* ruby 2.0.0
+* JRuby 1.9
+* Rubinius 1.9
+
 ## Contributing
 
 There are many, many ways to contribute to this project...but I will only explain two :smile:
